@@ -40,6 +40,25 @@ Matrix::~Matrix() {
     delete [] value;
 }
 
+auto Matrix::operator=(Matrix const &source) -> Matrix & {
+    name = source.name;
+    numOfRows = source.numOfRows;
+    numOfColumns = source.numOfColumns;
+
+    for(int i = 0; i < numOfRows; i++)
+        delete [] value[i];
+    delete [] value;
+
+    value = new int*[numOfRows];
+    for(int i = 0; i < numOfRows; i++) {
+        value[i] = new int[numOfColumns];
+        for(int j = 0; j < numOfColumns; j++)
+            value[i][j] = source.value[i][j];
+    }
+
+    return *this;
+}
+
 auto operator<<(std::ostream &os, Matrix const &matrix) -> std::ostream & {
     os << "Matrix " << matrix.name << ":\n";
     for(int i = 0; i < matrix.numOfRows; i++) {
@@ -49,4 +68,8 @@ auto operator<<(std::ostream &os, Matrix const &matrix) -> std::ostream & {
         std::cout << "\n";
     }
     return os;
+}
+
+auto Matrix::setName(char newName) -> void {
+    name = newName;
 }

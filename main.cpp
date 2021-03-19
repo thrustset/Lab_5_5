@@ -3,7 +3,7 @@
 
 int main() {
     int numOfRows = 3;
-    int numOfColumns = 4;
+    int numOfColumns = 5;
 
     auto **value = new int*[numOfRows];
     for(int i = 0; i < numOfRows; i++) {
@@ -14,5 +14,14 @@ int main() {
 
     auto matrix1 = Matrix('1', numOfRows, numOfColumns, value);
     std::cout << matrix1;
+
+    auto matrix2 = Matrix(matrix1);
+    matrix2.setName('2');
+    std::cout << "\nКонструктор копирования:\n" << matrix2;
+
+    auto matrix3 = matrix2;
+    matrix3.setName('3');
+    std::cout << "\nОператор присваивания:\n" << matrix3;
+
     return 0;
 }

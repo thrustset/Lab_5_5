@@ -13,5 +13,9 @@ public:
     Matrix(Matrix const &source);
     ~Matrix();
 
+    auto operator=(Matrix const &source) -> Matrix &;
+
     friend auto operator<<(std::ostream &os, Matrix const &matrix) -> std::ostream &;
+
+    auto setName(char newName) -> void;
 };
