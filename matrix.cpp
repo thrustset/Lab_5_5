@@ -59,12 +59,54 @@ auto Matrix::operator=(Matrix const &source) -> Matrix & {
     return *this;
 }
 
+auto Matrix::operator+(Matrix const &source) -> Matrix {
+    auto matrix = Matrix(*this);
+    for(int i = 0; i < numOfRows; i++) {
+        for(int j = 0; j < numOfColumns; j++)
+            matrix.value[i][j] += source.value[i][j];
+    }
+    return matrix;
+}
+
+auto Matrix::operator++() -> Matrix & {
+    for(int i = 0; i < numOfRows; i++) {
+        for(int j = 0; j < numOfColumns; j++)
+            this->value[i][j]++;
+    }
+    return *this;
+}
+
+auto Matrix::operator+=(Matrix const &source) -> Matrix & {
+    for(int i = 0; i < numOfRows; i++) {
+        for(int j = 0; j < numOfColumns; j++)
+            this->value[i][j] += source.value[i][j];
+    }
+    return *this;
+}
+
+auto Matrix::operator*(int scalar) const -> Matrix {
+    auto matrix = Matrix(this->name, this->numOfRows, this->numOfColumns, this->value);
+    for(int i = 0; i < numOfRows; i++) {
+        for(int j = 0; j < numOfColumns; j++)
+            matrix.value[i][j] *= scalar;
+    }
+    return matrix;
+}
+
+auto Matrix::operator*=(int scalar) -> Matrix & {
+    for(int i = 0; i < numOfRows; i++) {
+        for(int j = 0; j < numOfColumns; j++)
+            this->value[i][j] *= scalar;
+    }
+    return *this;
+}
+
 auto operator<<(std::ostream &os, Matrix const &matrix) -> std::ostream & {
     os << "Matrix " << matrix.name << ":\n";
     for(int i = 0; i < matrix.numOfRows; i++) {
         std::cout << "\t";
         for(int j = 0; j < matrix.numOfColumns; j++)
-            std::cout << matrix.value[i][j] << " ";
+            std::cout << matrix.value[i][j] << "\t";
         std::cout << "\n";
     }
     return os;

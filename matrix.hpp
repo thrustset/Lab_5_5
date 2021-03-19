@@ -14,6 +14,11 @@ public:
     ~Matrix();
 
     auto operator=(Matrix const &source) -> Matrix &;
+    auto operator+(Matrix const &source) -> Matrix;
+    auto operator++() -> Matrix &;
+    auto operator+=(Matrix const &source) -> Matrix &;
+    auto operator*(int scalar) const -> Matrix;
+    auto operator*=(int scalar) -> Matrix &;
 
     friend auto operator<<(std::ostream &os, Matrix const &matrix) -> std::ostream &;
 
